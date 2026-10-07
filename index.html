@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#4A2926">
+<title>VERTIGO FILMS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ivory:#F3EEE4; --choc:#4A2926; --terra:#A96557;
+  --serif:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  --sans:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --fade:1.4s;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:var(--choc);color:var(--ivory);font-family:var(--sans);font-weight:300;-webkit-font-smoothing:antialiased}
+.mark{display:block;aspect-ratio:360/465;fill:currentColor}
+
+/* Capas: intro, gate, main */
+.layer{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;opacity:0;visibility:hidden;
+  transition:opacity var(--fade) ease,visibility 0s linear var(--fade);
+  padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+.layer.on{opacity:1;visibility:visible;transition:opacity var(--fade) ease,visibility 0s}
+
+/* 1. Intro */
+.intro{justify-content:center;gap:2.2rem}
+.intro .mark{height:clamp(84px,14vh,128px)}
+.intro .word{font-family:var(--serif);font-weight:400;font-size:clamp(1.5rem,4.4vw,2.3rem);letter-spacing:.34em;margin-right:-.34em}
+
+/* 2. Clave */
+.gate{justify-content:center;text-align:center;padding-left:1.5rem;padding-right:1.5rem;padding-bottom:12vh}
+.gate>*{opacity:0;transition:opacity 1.6s ease}
+.gate.on>.g1{opacity:1}
+.gate.on>.g2{opacity:1;transition-delay:.9s}
+.gate.on>.g3{opacity:1;transition-delay:1.8s}
+.gate .g1{font-family:var(--serif);font-weight:300;font-size:clamp(2.6rem,8vw,5.2rem);line-height:1.05;letter-spacing:.01em}
+.gate .g2{margin-top:1.6rem;max-width:30ch;font-size:.92rem;line-height:1.8;letter-spacing:.04em;color:rgba(243,238,228,.74)}
+.gate .g3{margin-top:3.4rem;width:min(320px,80vw)}
+.gate input{width:100%;background:transparent;border:0;border-bottom:1px solid rgba(243,238,228,.38);border-radius:0;color:var(--ivory);
+  font:300 1.15rem var(--sans);letter-spacing:.32em;text-align:center;padding:.7rem 0;outline:0;caret-color:var(--terra);transition:border-color .5s}
+.gate input:focus{border-bottom-color:var(--terra)}
+.gate input:focus-visible{border-bottom-width:2px}
+.gate .err{min-height:1.4rem;margin-top:1rem;font-size:.78rem;letter-spacing:.04em;color:#D9A094;opacity:0;transition:opacity .6s}
+.gate .err.show{opacity:1}
+.shake{animation:shake .5s}
+@keyframes shake{20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(3px)}}
+.gate.leaving{filter:blur(6px);transition:opacity 1.2s ease,filter 1.2s ease,visibility 0s linear 1.2s}
+
+/* 3. Archivo */
+.main{overflow-y:auto;justify-content:space-between;padding-left:clamp(1.4rem,5vw,4rem);padding-right:clamp(1.4rem,5vw,4rem)}
+.top{width:100%;display:flex;flex-direction:column;align-items:center;gap:1rem;padding-top:clamp(1.8rem,5vh,3.2rem)}
+.top .mark{height:34px}
+.top .num{font-size:.7rem;letter-spacing:.34em;margin-right:-.34em;color:rgba(243,238,228,.62)}
+.sets{width:100%;max-width:1240px;flex:1;display:grid;grid-template-columns:repeat(3,1fr);margin:clamp(2rem,6vh,4rem) 0}
+.set{display:flex;flex-direction:column;justify-content:flex-end;gap:1.1rem;padding:0 clamp(1.2rem,2.4vw,2.4rem) 1rem;min-height:46vh;border-left:1px solid rgba(243,238,228,.16);opacity:0;transition:opacity 1.6s ease}
+.set:last-child{border-right:1px solid rgba(243,238,228,.16)}
+.main.on .set:nth-child(1){opacity:1;transition-delay:.5s}
+.main.on .set:nth-child(2){opacity:1;transition-delay:1s}
+.main.on .set:nth-child(3){opacity:1;transition-delay:1.5s}
+.set h2{font-family:var(--serif);font-weight:300;font-size:clamp(2rem,3.4vw,3rem);letter-spacing:.06em;line-height:1}
+.set p{font-size:.88rem;line-height:1.8;color:rgba(243,238,228,.7);max-width:26ch;letter-spacing:.02em}
+.btn{align-self:flex-start;margin-top:.8rem;display:inline-block;color:var(--ivory);text-decoration:none;font-size:.72rem;font-weight:400;letter-spacing:.26em;
+  padding:1rem 1.5rem;border:1px solid rgba(243,238,228,.45);transition:background .5s,border-color .5s}
+.btn:hover{background:var(--terra);border-color:var(--terra)}
+.btn:focus-visible,.gate input:focus-visible{outline:2px solid var(--terra);outline-offset:4px}
+.foot{width:100%;text-align:center;padding:0 0 clamp(1.6rem,4vh,2.6rem);display:flex;flex-direction:column;gap:.8rem}
+.foot b{font:400 1.05rem var(--serif);letter-spacing:.34em;margin-right:-.34em}
+.foot span{font-size:.62rem;letter-spacing:.3em;margin-right:-.3em;color:rgba(243,238,228,.55)}
+
+@media (max-width:760px){
+  .sets{grid-template-columns:1fr;margin:2.2rem 0}
+  .set{min-height:0;padding:2.4rem 0 2.4rem 1.2rem;border-right:0!important}
+  .set:last-child{border-right:0}
+  .set p{max-width:34ch}
+}
+@media (prefers-reduced-motion:reduce){
+  :root{--fade:.01s}
+  .gate>*,.set{transition-duration:.01s!important;transition-delay:0s!important}
+  .shake{animation:none}.gate.leaving{filter:none}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="vmark" viewBox="445 395 360 465">
+    <path id="vhalf" d="M630 403 L795 630 L620 712 C665 670 704 640 698 596 C690 530 640 470 596 425 Z"/>
+    <use href="#vhalf" transform="rotate(180 625 626)"/>
+  </symbol>
+</svg>
+
+<!-- 1. INTRO -->
+<section class="layer intro" id="intro" aria-label="VERTIGO FILMS">
+  <svg class="mark" aria-hidden="true"><use href="#vmark"/></svg>
+  <div class="word">VERTIGO FILMS</div>
+</section>
+
+<!-- 2. CLAVE -->
+<section class="layer gate" id="gate">
+  <h1 class="g1" id="couple"></h1>
+  <p class="g2">Escribid la clave que desbloqueará vuestro recuerdo de vida</p>
+  <form class="g3" id="form" autocomplete="off">
+    <input id="key" type="password" aria-label="Clave" enterkeyhint="go" autocapitalize="off" autocorrect="off" spellcheck="false" required>
+    <div class="err" id="err" role="alert"></div>
+  </form>
+</section>
+
+<!-- 3. ARCHIVO -->
+<main class="layer main" id="main">
+  <header class="top">
+    <svg class="mark" aria-hidden="true"><use href="#vmark"/></svg>
+    <div class="num" id="num"></div>
+  </header>
+
+  <div class="sets">
+    <section class="set">
+      <h2>THE FILM</h2>
+      <p>La película de vuestro día.</p>
+      <a class="btn" id="film" target="_blank" rel="noopener">WATCH FILM</a>
+    </section>
+    <section class="set">
+      <h2>THE DAY</h2>
+      <p>Las fotografías, tal y como ocurrió.</p>
+      <a class="btn" id="photos" target="_blank" rel="noopener">SEE PHOTOS</a>
+    </section>
+    <section class="set">
+      <h2>THE EXTRAS</h2>
+      <p>Teaser, ceremonia, discursos y más.</p>
+      <a class="btn" id="extras" target="_blank" rel="noopener">SEE EXTRAS</a>
+    </section>
+  </div>
+
+  <footer class="foot">
+    <b>VERTIGO FILMS</b>
+    <span>THE DAY PASSES. THE FEELING REMAINS.</span>
+  </footer>
+</main>
+
+<script>
+/* ============================================================
+   CONFIGURACIÓN DE LA BODA — es lo único que hay que cambiar
+   passwordHash = SHA-256 de la clave en minúsculas y sin espacios.
+   Para generarlo: abre la consola del navegador y ejecuta
+   crypto.subtle.digest("SHA-256", new TextEncoder().encode("elmejorrecuerdo"))
+     .then(b => console.log([...new Uint8Array(b)].map(x => x.toString(16).padStart(2,"0")).join("")))
+   Clave actual: ELMEJORRECUERDO (no distingue mayúsculas)
+   ============================================================ */
+const archive = {
+  number: "001",
+  couple: "Luisa y Ferrán",
+  date: "",
+  passwordHash: "3c6bd2a793b4d27a01613d0366ea559711ab241b88041bf0f548e24ce174db4f",
+  filmUrl:   "https://drive.google.com/drive/folders/1CD9axkHFCeitKrr1K_FokhYDvOHyMvgL?usp=drive_link",
+  photosUrl: "https://drive.google.com/drive/folders/1CD9axkHFCeitKrr1K_FokhYDvOHyMvgL?usp=drive_link",
+  extrasUrl: "https://drive.google.com/drive/folders/1CD9axkHFCeitKrr1K_FokhYDvOHyMvgL?usp=drive_link"
+};
+
+/* Tiempos de la secuencia (ms) */
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const T = reduce ? {hold:300, fade:10, pause:300} : {hold:3200, fade:1400, pause:1000};
+
+const $ = id => document.getElementById(id);
+document.title = "VERTIGO FILMS";
+$("couple").textContent = archive.couple;
+$("num").textContent = "ARCHIVE " + archive.number + (archive.date ? "  ·  " + archive.date : "");
+$("film").href = archive.filmUrl;
+$("photos").href = archive.photosUrl;
+$("extras").href = archive.extrasUrl;
+
+/* Secuencia de entrada: VERTIGO FILMS → se funde → pausa → novios + clave */
+document.fonts.ready.then(() => {
+  requestAnimationFrame(() => {
+    $("intro").classList.add("on");
+    setTimeout(() => {
+      $("intro").classList.remove("on");
+      setTimeout(() => {
+        $("gate").classList.add("on");
+        setTimeout(() => $("key").focus({preventScroll:true}), reduce ? 50 : 2600);
+      }, T.fade + T.pause);
+    }, T.hold + T.fade);
+  });
+});
+
+/* Comprobación de la clave */
+async function sha256(text){
+  const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text.trim().toLowerCase()));
+  return [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2,"0")).join("");
+}
+
+$("form").addEventListener("submit", async e => {
+  e.preventDefault();
+  const err = $("err"), input = $("key");
+  if(!(window.crypto && crypto.subtle)){
+    err.textContent = "Abrid esta página desde su enlace https para continuar.";
+    err.classList.add("show"); return;
+  }
+  if(await sha256(input.value) === archive.passwordHash){
+    err.classList.remove("show");
+    input.blur();
+    $("gate").classList.add("leaving");
+    $("gate").classList.remove("on");
+    setTimeout(() => $("main").classList.add("on"), reduce ? 50 : 900);
+  } else {
+    err.textContent = "Esa clave no es correcta. Revisad vuestra tarjeta e intentadlo de nuevo.";
+    err.classList.add("show");
+    input.classList.remove("shake"); void input.offsetWidth; input.classList.add("shake");
+    input.select();
+  }
+});
+$("key").addEventListener("input", () => $("err").classList.remove("show"));
+</script>
+</body>
+</html>
